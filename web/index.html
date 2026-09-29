@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/; worker-src 'self' https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/; connect-src 'self' https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/ https://huggingface.co https://cdn-lfs.hf.co https://cdn-lfs-us-1.hf.co; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Translation Check Lab: practice and human-review training</title>
+  <meta name="description" content="Practice lab and human-review training environment for checking humanitarian SMS translations before sending">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <strong class="site-title" data-i18n="hero.title">Translation Check Lab</strong>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#home" data-nav="home" data-i18n="nav.home">Home</a></li>
+          <li><a href="#practice" data-nav="practice" data-i18n="nav.practice">Practice</a></li>
+          <li><a href="#check" data-nav="check" data-i18n="nav.check">Check my text</a></li>
+          <li><a href="facilitator.html" data-i18n="nav.facilitator">Facilitator guide</a></li>
+          <li class="lang-switch" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true" data-i18n="nav.lang.en">English</button>
+            <button type="button" data-lang="fr" aria-pressed="false" data-i18n="nav.lang.fr">Français</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section data-view="home" id="home">
+      <h1 data-i18n="hero.title">Translation Check Lab</h1>
+      <p class="notice" data-i18n="hero.practiceNotice">It is a practice lab, not a translation service, and it never approves a message.</p>
+      <p class="notice fr-disclaimer-prominent" id="fr-notice" data-i18n="lang.notice" hidden>French prepared with machine assistance; not yet reviewed by a professional translator.</p>
+      <p data-i18n="hero.subtitle">Machine translation can help draft, but a message that affects safety, health or access to aid needs a qualified bilingual person to check it before it is sent.</p>
+      <p class="kit-link"><a href="https://parallexlabs.github.io/humanitarian-ai-training-kit/" data-i18n="hero.kitLink">Part of the Humanitarian AI Training Kit (Session 2)</a></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#practice" data-i18n="hero.startPractice">Start practice</a>
+        <a class="btn btn-secondary" href="#check" data-i18n="hero.checkOwn">Check my own text</a>
+      </div>
+
+      <h2 data-i18n="scope.title">Scope</h2>
+      <p data-i18n="scope.body">SMS is not confidential. Use this lab only for broadcast messages to groups, never for messages about an individual person.</p>
+
+      <h2 data-i18n="variety.title">Language variety</h2>
+      <p data-i18n="variety.body">French differs across Canada, Europe and West and Central Africa. Arabic ranges from Modern Standard Arabic to local varieties that OPUS-MT may not match. Consider audio or visual channels alongside SMS for people with low literacy.</p>
+
+      <h2 data-i18n="privacy.title">Privacy</h2>
+      <p data-i18n="privacy.body">Text is processed locally by this application. When you choose model download, your browser retrieves model files from the listed third-party hosts. Text is not sent to those hosts by this application.</p>
+
+      <h2 data-i18n="limitations.title">Limitations</h2>
+      <p data-i18n="limitations.body">OPUS-MT quality varies by language and domain.</p>
+      <p data-i18n="limitations.checks">Pattern checks are intentionally conservative and produce false positives. They are prompts for human review, not accuracy measurements.</p>
+      <p data-i18n="limitations.tatoeba">Tatoeba test sentences are short, general-domain sentences, not humanitarian or medical text, so these scores do not transfer to emergency messages.</p>
+      <p data-i18n="limitations.examples">Examples of false alarms: a correctly translated French word such as "minutes" flagged as untranslated; a capitalised place name such as "Well 12" flagged when only the capital letter changed in back-translation.</p>
+
+      <h2 data-i18n="pairs.title">Published model quality by language pair</h2>
+      <p data-i18n="pairs.intro">Benchmark scores are quoted exactly from each upstream OPUS-MT model card on Hugging Face. They are not a guarantee for your message.</p>
+      <ul class="sources-list" id="pair-quality-list"></ul>
+
+      <h2 data-i18n="sources.title">Sources and guidance</h2>
+      <ul class="sources-list">
+        <li><span data-i18n="sources.kit">Evacuation SMS case</span>: <a href="https://parallexlabs.github.io/humanitarian-ai-training-kit/en/case-studies/01-evacuation-sms-translation.html">Humanitarian AI Training Kit, Case study 1</a></li>
+        <li><span data-i18n="sources.clear">CLEAR Global language guidance</span>: <a href="https://clearglobal.org/language-and-communication-services/">Language and communication services</a>; <a href="https://clearglobal.org/wp-content/uploads/2023/01/How-to-work-with-interpreters-and-translators_EN.pdf">How to work with interpreters and translators (PDF)</a></li>
+        <li><span data-i18n="sources.gsm">GSM 03.38 character set</span>: <a href="https://www.etsi.org/deliver/etsi_ts/123000_123099/123038/17.00.00_60/ts_123038v170000p.pdf">ETSI TS 123 038</a> (same tables as 3GPP TS 23.038)</li>
+      </ul>
+    </section>
+
+    <section data-view="practice" id="practice" class="hidden">
+      <h1 data-i18n="practice.title">Practice mode</h1>
+      <p class="synthetic-label" data-i18n="practice.synthetic">SYNTHETIC training exercise only.</p>
+      <p data-i18n="practice.intro">Review illustrative translations of synthetic humanitarian messages.</p>
+      <div id="practice-panel" class="card">
+        <p id="practice-counter" aria-live="polite"></p>
+        <h2 data-i18n="practice.source">Source message</h2>
+        <div class="message-box" id="practice-source"></div>
+        <h2 data-i18n="practice.translation">Illustrative translation</h2>
+        <div class="message-box" id="practice-translation"></div>
+        <div id="practice-back-block" class="hidden">
+          <h2 data-i18n="practice.backTranslation">Back-translation (warning signal only)</h2>
+          <p class="notice" data-i18n="practice.backWarning">Back-translation can hide real errors. It is never proof that a message is safe to send.</p>
+          <div class="message-box" id="practice-back"></div>
+        </div>
+        <h2 data-i18n="practice.errors">What is wrong?</h2>
+        <ul class="checklist" id="practice-errors"></ul>
+        <fieldset id="practice-safe">
+          <legend data-i18n="practice.safe">Safe to send?</legend>
+          <label><input type="radio" name="safe" value="yes"> <span data-i18n="practice.safe.yes">Yes</span></label>
+          <label><input type="radio" name="safe" value="no"> <span data-i18n="practice.safe.no">No</span></label>
+        </fieldset>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-secondary" id="practice-prev" data-i18n="practice.prev">Previous</button>
+          <button type="button" class="btn btn-primary" id="practice-submit" data-i18n="practice.submit">Check my answers</button>
+          <button type="button" class="btn btn-secondary" id="practice-next" data-i18n="practice.next">Next item</button>
+        </div>
+        <div id="practice-answer" class="card hidden" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section data-view="check" id="check" class="hidden">
+      <h1 data-i18n="check.title">Check my own text</h1>
+      <p data-i18n="check.intro">Paste a short source message and its translation.</p>
+      <p class="notice" data-i18n="scope.body">SMS is not confidential. Use this lab only for broadcast messages to groups, never for messages about an individual person.</p>
+
+      <div class="card">
+        <div class="field">
+          <label for="source-lang" data-i18n="check.sourceLang">Source language</label>
+          <select id="source-lang" aria-describedby="source-lang-hint"></select>
+        </div>
+        <div class="field">
+          <label for="source-text" data-i18n="check.sourceLabel">Source message</label>
+          <textarea id="source-text" rows="4"></textarea>
+        </div>
+        <div class="field">
+          <label for="target-lang" data-i18n="check.targetLang">Target language</label>
+          <select id="target-lang"></select>
+        </div>
+        <div class="field">
+          <label for="translation-text" data-i18n="check.translationLabel">Translation</label>
+          <textarea id="translation-text" rows="4"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" id="run-checks" data-i18n="check.runPattern">Run checks</button>
+      </div>
+
+      <div class="card" id="live-translate-section">
+        <h2 data-i18n="check.liveTitle">Optional: live on-device translation</h2>
+        <p><span data-i18n="check.liveIntro">Download an OPUS-MT model.</span> <span id="model-size"></span></p>
+        <p id="model-benchmark" class="muted"></p>
+        <p id="model-quality-warning" class="warning-inline hidden" role="alert"></p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-secondary" id="load-model" data-i18n="check.loadModel">Download and translate</button>
+          <button type="button" class="btn btn-secondary" id="cancel-model" data-i18n="check.cancel">Cancel download</button>
+        </div>
+        <p id="model-status" aria-live="polite"></p>
+        <div id="model-progress" class="hidden" aria-live="polite" aria-label="Model download progress">
+          <progress id="model-progress-fill" class="progress-bar" value="0" max="100"></progress>
+        </div>
+        <h3 data-i18n="check.backTranslation">Back-translation</h3>
+        <p id="back-translation-label" class="muted"></p>
+        <p id="ar-instruction-note" class="notice hidden"></p>
+        <p class="notice" data-i18n="check.backWarning">Back-translation is a warning signal only, not proof. A matching back-translation can hide a real error in the target language.</p>
+        <div class="message-box" id="back-translation"></div>
+      </div>
+
+      <div id="results-live" class="visually-hidden" aria-live="polite"></div>
+
+      <div class="card">
+        <h2 data-i18n="check.flagsTitle">Meaning-risk flags</h2>
+        <p class="notice" data-i18n="limitations.checks">Pattern checks are intentionally conservative and produce false positives. They are prompts for human review, not accuracy measurements.</p>
+        <ul class="flag-list" id="flags-list"></ul>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="check.smsTitle">SMS reality check</h2>
+        <p class="muted" data-i18n="check.smsIntro">Characters outside GSM 03.38 force UCS-2 encoding (70/67 per segment), including typographic apostrophes (for example in French l'eau) and letters such as ê or ô.</p>
+        <div class="sms-grid">
+          <div id="sms-source"></div>
+          <div id="sms-translation"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="check.hintsTitle">Source message hints</h2>
+        <ul id="hints-list"></ul>
+      </div>
+
+      <div class="card" id="review-form">
+        <h2 data-i18n="check.reviewTitle">Human review record</h2>
+        <p class="notice" data-i18n="check.reviewDisclaimer">Complete this record before copying final text. The software does not approve messages. No names are stored.</p>
+        <div class="field">
+          <label for="language-competence" data-i18n="check.languageCompetence">Your language competence (no names)</label>
+          <input type="text" id="language-competence" required>
+        </div>
+        <div class="field">
+          <label for="dialect-competence" data-i18n="check.dialectCompetence">Dialect or variety competence</label>
+          <input type="text" id="dialect-competence" required>
+        </div>
+        <fieldset id="community-status">
+          <legend data-i18n="check.community">Community connection</legend>
+          <label><input type="radio" name="community" value="from_community"> <span data-i18n="check.community.from">I am from the affected community</span></label>
+          <label><input type="radio" name="community" value="checked_with_community"> <span data-i18n="check.community.checked">I have checked with community members</span></label>
+          <label><input type="radio" name="community" value="neither"> <span data-i18n="check.community.neither">Neither of the above</span></label>
+        </fieldset>
+        <fieldset>
+          <legend data-i18n="check.checksDone">Checks I completed</legend>
+          <ul class="checklist" id="review-checks"></ul>
+        </fieldset>
+        <fieldset id="pretest-status">
+          <legend data-i18n="check.pretest">Pre-tested with community members?</legend>
+          <label><input type="radio" name="pretest" value="yes"> <span data-i18n="check.pretest.yes">Yes</span></label>
+          <label><input type="radio" name="pretest" value="no"> <span data-i18n="check.pretest.no">No</span></label>
+          <label><input type="radio" name="pretest" value="not_applicable"> <span data-i18n="check.pretest.na">Not applicable</span></label>
+        </fieldset>
+        <fieldset id="review-decision">
+          <legend data-i18n="check.decision">Decision</legend>
+          <label><input type="radio" name="decision" value="approve"> <span data-i18n="check.decision.approve">Approve</span></label>
+          <label><input type="radio" name="decision" value="approve_edits"> <span data-i18n="check.decision.approve_edits">Approve with edits</span></label>
+          <label><input type="radio" name="decision" value="do_not_send" checked> <span data-i18n="check.decision.do_not_send">Do not send</span></label>
+        </fieldset>
+        <div class="field">
+          <label for="edited-text" data-i18n="check.editedText">Final edited text</label>
+          <textarea id="edited-text" rows="3"></textarea>
+        </div>
+        <p id="copy-final-hint" class="muted" data-i18n="check.copyLocked">Complete the review record to unlock Copy final text.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" id="copy-final-text" disabled data-i18n="check.copyFinal">Copy final text</button>
+          <button type="button" class="btn btn-secondary" id="export-md" data-i18n="check.exportMd">Export Markdown</button>
+          <button type="button" class="btn btn-secondary" id="print-record" data-i18n="check.print">Print record</button>
+        </div>
+        <p id="copy-final-status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <a href="https://parallexlabs.github.io/humanitarian-ai-training-kit/" data-i18n="footer.kit">Humanitarian AI Training Kit</a>
+      ·
+      <a href="https://github.com/parallexlabs/humanitarian-ai-risk-screen" data-i18n="footer.risk">AI Risk Screen</a>
+      ·
+      <a href="https://parallexlabs.github.io/before-you-paste/" data-i18n="footer.beforePaste">Before You Paste</a>
+      ·
+      <a href="https://parallexlabs.github.io/source-check-lab/" data-i18n="footer.sourceCheck">Source Check Lab</a>
+    </p>
+    <p data-i18n="footer.frNotice">French prepared with machine assistance; not yet reviewed by a professional translator.</p>
+    <p data-i18n="footer.licence">Code: Apache-2.0. Practice content: CC BY 4.0.</p>
+  </footer>
+
+  <script type="module" src="js/ui/app.js"></script>
+</body>
+</html>

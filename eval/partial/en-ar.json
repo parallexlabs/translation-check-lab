@@ -1,0 +1,11 @@
+{
+  "modelForward": "Xenova/opus-mt-en-ar",
+  "modelBack": "Xenova/opus-mt-ar-en",
+  "revisionForward": "034a684356c19021a187cda4d7f823298b913921",
+  "revisionBack": "09c7556866400dcc53562ba8d7035119e7d9a2c1",
+  "transformersVersion": "4.3.0",
+  "preserved": 7,
+  "n": 30,
+  "distinctScenarios": 30,
+  "rate": 0.23333333333333334
+}

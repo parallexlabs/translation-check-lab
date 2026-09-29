@@ -1,0 +1,193 @@
+{
+  "items": [
+    {
+      "id": "p01",
+      "direction": "en-fr",
+      "topic": "evacuation",
+      "source": "Road B is closed. Use Road C to reach Reception Centre A. Entrance E only is step-free. Do not use Road B.",
+      "translation": "La route B est ouverte vers le centre d'accueil A. Toutes les entrées sont accessibles sans marches. Rendez-vous là immédiatement.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["negation", "modality", "names"],
+      "explanation": "Negation lost (closed → open), route status wrong, all entrances vs Entrance E only, immediate instruction added."
+    },
+    {
+      "id": "p02",
+      "direction": "en-fr",
+      "topic": "water",
+      "source": "Boil tap water for 3 minutes before drinking. Do not drink from Well 7 until 15:00 on 4 April.",
+      "translation": "Faites bouillir l'eau du robinet pendant 3 minutes avant de boire. Ne buvez pas l'eau du puits 7 avant 15 h le 4 avril.",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Numbers, time, date and negation preserved. Illustrative correct translation."
+    },
+    {
+      "id": "p03",
+      "direction": "en-fr",
+      "topic": "distribution",
+      "source": "Food distribution at School 12 on 03/04 from 9:00 a.m. Bring your ID card. Call 1-800-555-0199 for help.",
+      "translation": "Distribution alimentaire à l'école 12 le 4 mars à 9 h. Apportez votre carte d'identité. Appelez le 1-800-555-0198 pour de l'aide.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["times", "contact"],
+      "explanation": "Ambiguous 03/04 misread as 4 March; phone number digit changed."
+    },
+    {
+      "id": "p04",
+      "direction": "en-fr",
+      "topic": "vaccination",
+      "source": "Free measles vaccination at Clinic North on Saturday 12 October, 8:30 a.m. to 4:00 p.m. Children under 5 must come with a parent.",
+      "translation": "Vaccination gratuite contre la rougeole à la clinique Nord samedi 12 octobre, de 8 h 30 à 16 h. Les enfants de moins de 5 ans doivent venir avec un parent.",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Times, dates and must/doivent preserved."
+    },
+    {
+      "id": "p05",
+      "direction": "en-fr",
+      "topic": "cash",
+      "source": "Cash assistance: 150 USD per household. You must register by 20 May. Unregistered households will not receive payment.",
+      "translation": "Aide en espèces : 150 USD par ménage. Vous devez vous inscrire avant le 20 mai. Les ménages non inscrits ne recevront pas de paiement.",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Amount, date and double negation preserved."
+    },
+    {
+      "id": "p06",
+      "direction": "en-fr",
+      "topic": "shelter",
+      "source": "Shelter Hall 3 opens at 18:00. No pets allowed. Smoking is not permitted inside.",
+      "translation": "Le refuge Hall 3 ouvre à 18 h. Les animaux sont autorisés. Il est permis de fumer à l'intérieur.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["negation"],
+      "explanation": "Both negations reversed: pets allowed, smoking permitted."
+    },
+    {
+      "id": "p07",
+      "direction": "en-fr",
+      "topic": "hotline",
+      "source": "For protection concerns, call *12345# from any mobile. Lines open 24 hours. Do not share this number publicly.",
+      "translation": "Pour des préoccupations de protection, composez *12345# depuis n'importe quel mobile. Lignes ouvertes 24 heures sur 24. Ne partagez pas ce numéro publiquement.",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Short code, time reference and negation preserved."
+    },
+    {
+      "id": "p08",
+      "direction": "fr-en",
+      "topic": "evacuation",
+      "source": "La route C est fermée. Empruntez la route D vers le centre d'accueil B. Entrée F seulement sans marches. N'utilisez pas la route C.",
+      "translation": "Road C is open. Use Road D to reach Reception Centre B. All entrances are step-free. Go there now.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["negation", "modality", "names"],
+      "explanation": "Closed → open, n'utilisez pas lost, all entrances vs Entrée F only."
+    },
+    {
+      "id": "p09",
+      "direction": "fr-en",
+      "topic": "water",
+      "source": "Faites bouillir l'eau du robinet 5 minutes. Ne consommez pas l'eau du puits 3 avant 10 h le 6 mai.",
+      "translation": "Boil tap water for 5 minutes. Do not drink from Well 3 before 10:00 a.m. on 6 May.",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Numbers, time, date and negation preserved."
+    },
+    {
+      "id": "p10",
+      "direction": "fr-en",
+      "topic": "distribution",
+      "source": "Distribution de kits NFI au stade Municipal le 14/06 à 14 h. Présentez votre carte. Infos : www.aid-example.org/dist",
+      "translation": "NFI kit distribution at Municipal Stadium on 14 June at 2 p.m. Present your card. Info: www.aid-example.org/dist",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Date clarified, time, URL and acronym context preserved. NFI left as sector term."
+    },
+    {
+      "id": "p11",
+      "direction": "fr-en",
+      "topic": "vaccination",
+      "source": "Vaccination COVID-19 gratuite, centre de santé Est, mercredi 9 h à 17 h. Les personnes de 65 ans et plus doivent apporter une pièce d'identité.",
+      "translation": "Free COVID-19 vaccination, East health centre, Wednesday 9 a.m. to 5 p.m. People aged 65 and over may bring ID.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["modality"],
+      "explanation": "doivent (must) weakened to may; requirement softened."
+    },
+    {
+      "id": "p12",
+      "direction": "fr-en",
+      "topic": "cash",
+      "source": "Aide en espèces de 200 USD par famille. Inscription obligatoire avant le 1er juillet. Aucun paiement sans inscription.",
+      "translation": "Cash assistance of 200 USD per family. Mandatory registration before 1 July. No payment without registration.",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Amount, date and aucun/no preserved."
+    },
+    {
+      "id": "p13",
+      "direction": "fr-en",
+      "topic": "shelter",
+      "source": "Le refuge Gymnase 2 accepte les familles à partir de 19 h. Capacité : 120 personnes. Les animaux ne sont pas admis.",
+      "translation": "Shelter Gymnasium 2 accepts families from 7 p.m. Capacity: 120 people. Pets are not allowed.",
+      "illustrative": true,
+      "safeToSend": true,
+      "errors": [],
+      "explanation": "Time, capacity number and negation preserved."
+    },
+    {
+      "id": "p14",
+      "direction": "fr-en",
+      "topic": "hotline",
+      "source": "Ligne d'écoute MHPSS : 0800-77-88-99, 8 h à 20 h. Service gratuit et confidentiel.",
+      "translation": "MHPSS helpline: 0800-77-88-90, 8 a.m. to 8 p.m. Free and confidential service.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["contact"],
+      "explanation": "Phone number digit changed (99 → 90)."
+    },
+    {
+      "id": "p15",
+      "direction": "en-fr",
+      "topic": "flooding",
+      "source": "Do not enter flooded areas. Call 0800-123-456 for help.",
+      "translation": "Entrez dans les zones inondées. Appelez le 0800-123-456 pour de l'aide.",
+      "backTranslation": "Do not enter flooded areas. Call 0800-123-456 for help.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["negation"],
+      "explanation": "The French says ENTER flooded areas (negation lost). Back-translation matches the English source and can look correct. Back-translation is a warning signal only, not proof."
+    },
+    {
+      "id": "p16",
+      "direction": "en-fr",
+      "topic": "water",
+      "source": "Do not drink water from Well 12. Boil tap water for 10 minutes. Food distribution on 03/04 at 14:00 at Site 7. Call 0800-77-88-90 for help.",
+      "translation": "Ne buvez pas l'eau du puits 12. Eau du robinet pendant 10 minutes. Distribution alimentaire le 03/04 à 14 h au site 7. Composez le 0800-77-88-90 pour de l'aide.",
+      "backTranslation": "Do not drink water from the well 12. Tap water for 10 minutes. Food distribution on 03/04 to 14:00 at site 7. Call 0800-77-88-90 for help.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["instructions", "times"],
+      "explanation": "Boil instruction dropped from translation and back-translation. Ambiguous date 03/04 remains in source."
+    },
+    {
+      "id": "p17",
+      "direction": "en-fr",
+      "topic": "cash",
+      "source": "Cash assistance: 250 USD per household. Register by 30 June.",
+      "translation": "Aide en espèces : 25 USD par ménage. Inscrivez-vous avant le 30 juin.",
+      "illustrative": true,
+      "safeToSend": false,
+      "errors": ["numbers"],
+      "explanation": "Amount changed from 250 to 25 USD."
+    }
+  ]
+}

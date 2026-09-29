@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+.eval-cache/
+.model-cache/
+.DS_Store
+*.log
+.env
+.env.*

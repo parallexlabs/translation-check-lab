@@ -1,0 +1,133 @@
+{
+  "date": "2026-09-29",
+  "mode": "pattern-only",
+  "practice": {
+    "uniqueItems": 17,
+    "overall": {
+      "precision": 0.46875,
+      "recall": 1,
+      "n": 15,
+      "uniqueItems": 17
+    },
+    "byCategory": {
+      "numbers": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "n": 1,
+        "precision": 1,
+        "recall": 1
+      },
+      "times": {
+        "tp": 2,
+        "fp": 5,
+        "fn": 0,
+        "n": 2,
+        "precision": 0.2857142857142857,
+        "recall": 1
+      },
+      "contact": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "n": 2,
+        "precision": 1,
+        "recall": 1
+      },
+      "negation": {
+        "tp": 4,
+        "fp": 1,
+        "fn": 0,
+        "n": 4,
+        "precision": 0.8,
+        "recall": 1
+      },
+      "modality": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "n": 3,
+        "precision": 1,
+        "recall": 1
+      },
+      "names": {
+        "tp": 2,
+        "fp": 8,
+        "fn": 0,
+        "n": 2,
+        "precision": 0.2,
+        "recall": 1
+      },
+      "untranslated": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 0,
+        "n": 0,
+        "precision": 0,
+        "recall": 1
+      },
+      "length": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "n": 0,
+        "precision": 1,
+        "recall": 1
+      },
+      "instructions": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0,
+        "n": 1,
+        "precision": 0.5,
+        "recall": 1
+      }
+    }
+  },
+  "model": {
+    "en-fr": {
+      "modelForward": "Xenova/opus-mt-en-fr",
+      "modelBack": "Xenova/opus-mt-fr-en",
+      "revisionForward": "28726206f80896b90035bd99cccd5cc1e151f916",
+      "revisionBack": "6b166a182780e118c997879d0ad5be4b53671644",
+      "transformersVersion": "4.3.0",
+      "preserved": 18,
+      "n": 30,
+      "distinctScenarios": 30,
+      "rate": 0.6
+    },
+    "fr-en": {
+      "modelForward": "Xenova/opus-mt-fr-en",
+      "modelBack": "Xenova/opus-mt-en-fr",
+      "revisionForward": "6b166a182780e118c997879d0ad5be4b53671644",
+      "revisionBack": "28726206f80896b90035bd99cccd5cc1e151f916",
+      "transformersVersion": "4.3.0",
+      "preserved": 20,
+      "n": 30,
+      "distinctScenarios": 30,
+      "rate": 0.6666666666666666
+    },
+    "en-es": {
+      "modelForward": "Xenova/opus-mt-en-es",
+      "modelBack": "Xenova/opus-mt-es-en",
+      "revisionForward": "4b002a4c7edd54a7ced58877258b87f7efd3f892",
+      "revisionBack": "eadfd7c658a9d8929ac3b8e996b68a68e2c7d480",
+      "transformersVersion": "4.3.0",
+      "preserved": 17,
+      "n": 30,
+      "distinctScenarios": 30,
+      "rate": 0.5666666666666667
+    },
+    "en-ar": {
+      "modelForward": "Xenova/opus-mt-en-ar",
+      "modelBack": "Xenova/opus-mt-ar-en",
+      "revisionForward": "034a684356c19021a187cda4d7f823298b913921",
+      "revisionBack": "09c7556866400dcc53562ba8d7035119e7d9a2c1",
+      "transformersVersion": "4.3.0",
+      "preserved": 7,
+      "n": 30,
+      "distinctScenarios": 30,
+      "rate": 0.23333333333333334
+    }
+  }
+}
