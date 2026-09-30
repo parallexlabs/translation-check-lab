@@ -1,3 +1,10 @@
+<p align="center" class="brand-mark">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/brand/parallex-mark-dark.png">
+    <img src=".github/brand/parallex-mark.png" alt="ParalleX Labs" width="120">
+  </picture>
+</p>
+
 # Translation Check Lab
 
 Translation Check Lab is a bilingual (English and French) practice lab and human-review training environment for Session 2 (verified work by role) of the [Humanitarian AI Training Kit](https://parallexlabs.github.io/humanitarian-ai-training-kit/). It helps people check short humanitarian broadcast SMS messages and their translations before sending. It is a practice lab, not a translation service, and it never approves a message. The software never shows a green "safe", "verified" or "approved" badge.
