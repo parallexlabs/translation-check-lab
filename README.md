@@ -66,7 +66,7 @@ Guidance: [CLEAR Global language and communication services](https://clearglobal
 
 ## Evaluation
 
-Run on 2026-09-29 against 17 synthetic practice items.
+Pattern checks re-run on 2026-10-18 against 17 synthetic practice items (results unchanged since 2026-09-29).
 
 **Pattern-only** (`npm run eval`):
 
@@ -91,7 +91,7 @@ Preserved means the numbers, times, contacts, negation count and action verbs of
 | en-es | 30 | 30 | Xenova/opus-mt-en-es | Xenova/opus-mt-es-en | 17/30 | 56.7% |
 | en-ar | 30 | 30 | Xenova/opus-mt-en-ar | Xenova/opus-mt-ar-en | 7/30 | 23.3% |
 
-Round-trip evaluation runs forward only for pairs with a real source pool (en-fr, fr-en, en-es, en-ar). The es-en and ar-en models are used only as the back leg of en-es and en-ar round trips. Tatoeba test sentences are short, general-domain sentences, not humanitarian or medical text, so these scores do not transfer to emergency messages. Partial results are saved to `eval/partial/` as each pair finishes. GSM segment counts are cross-checked against Twilio's [message-segment-calculator](https://github.com/TwilioDevEd/message-segment-calculator) (MIT).
+Round-trip evaluation runs forward only for pairs with a real source pool (en-fr, fr-en, en-es, en-ar). The es-en and ar-en models are used only as the back leg of en-es and en-ar round trips. The round-trip set is the 30 synthetic humanitarian SMS scenarios per source language in `eval/messages.js` (English, and French for fr-en), written for this lab; the distinct-scenario count is computed by `scripts/eval.mjs`, and a run fails if it is lower than n. They are short and synthetic, so these rates are a weak signal and do not show how the models perform on real emergency messages. Partial results are saved to `eval/partial/` as each pair finishes. GSM segment counts are cross-checked against Twilio's [message-segment-calculator](https://github.com/TwilioDevEd/message-segment-calculator) (MIT).
 
 ## Using it in a training session
 

@@ -10,7 +10,7 @@ import { execSync } from 'node:child_process';
 import { runMeaningChecks, roundTripPreserved } from '../web/js/core/meaning-checks.js';
 import { evalDeterministicChecks } from '../web/js/core/practice.js';
 import { MODEL_PAIRS, TRANSFORMERS_VERSION, prepareModelInput } from '../web/js/core/models.js';
-import { getEvalMessages, evalSourceLangForPair } from '../eval/messages.js';
+import { getEvalMessages, evalSourceLangForPair, countDistinctScenarios } from '../eval/messages.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__dirname, '../eval');
@@ -113,6 +113,10 @@ async function runModelEval() {
     const n = COUNT_BY_PAIR[pairKey] ?? 30;
     const sourceLang = evalSourceLangForPair(pairKey);
     const messages = getEvalMessages(sourceLang, n);
+    const distinct = countDistinctScenarios(messages);
+    if (distinct < messages.length) {
+      throw new Error(`[${pairKey}] only ${distinct} distinct scenarios in ${messages.length} messages`);
+    }
     let preserved = 0;
 
     try {
@@ -121,7 +125,7 @@ async function runModelEval() {
       console.log(`[${pairKey}] Loading ${back.id}…`);
       const pipeBack = await getPipeline(pipeline, back.id, back.revision);
       const batchSize = 16;
-      console.log(`[${pairKey}] Evaluating n=${messages.length}, distinct scenarios=${messages.length}, model=${forward.id} (threads=${PERF_CORES})…`);
+      console.log(`[${pairKey}] Evaluating n=${messages.length}, distinct scenarios=${distinct}, model=${forward.id} (threads=${PERF_CORES})…`);
       for (let i = 0; i < messages.length; i += batchSize) {
         const batch = messages.slice(i, i + batchSize);
         const translated = await translateBatch(pipeFwd, batch, forward);
@@ -138,9 +142,10 @@ async function runModelEval() {
         revisionForward: forward.revision,
         revisionBack: back.revision,
         transformersVersion: TRANSFORMERS_VERSION,
+        onnxThreads: PERF_CORES,
         preserved,
         n: messages.length,
-        distinctScenarios: messages.length,
+        distinctScenarios: distinct,
         rate: preserved / messages.length,
       };
       writeFileSync(partialPath, JSON.stringify(results[pairKey], null, 2));
@@ -149,7 +154,7 @@ async function runModelEval() {
       results[pairKey] = {
         error: String(err.message || err),
         n: messages.length,
-        distinctScenarios: messages.length,
+        distinctScenarios: distinct,
         modelForward: forward.id,
         modelBack: back.id,
       };
@@ -183,7 +188,8 @@ function buildResultsMarkdown(output) {
   if (output.model) {
     md += `\n## Model round-trip preservation\n\n`;
     md += `Preserved means the numbers, times, contacts, negation count and action verbs of the source all survive the round trip; a preserved round trip is a weak signal, not proof.\n\n`;
-    md += `Transformers.js ${TRANSFORMERS_VERSION}, ONNX threads ${PERF_CORES}\n\n`;
+    const threads = [...new Set(Object.values(output.model).map((r) => r.onnxThreads).filter(Boolean))];
+    md += `Transformers.js ${TRANSFORMERS_VERSION}, ONNX threads ${threads.length ? threads.join(', ') : 'not recorded'}\n\n`;
     md += '| Pair | n | Distinct scenarios | Model forward | Model back | Preserved | Rate |\n';
     md += '|------|---|-------------------|---------------|------------|-----------|------|\n';
     for (const [pair, r] of Object.entries(output.model)) {
@@ -203,7 +209,7 @@ async function main() {
   const existingModel = loadExistingModelResults();
 
   const output = {
-    date: new Date().toISOString().slice(0, 10),
+    date: new Date().toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' }),   // YYYY-MM-DD, Pacific time
     mode: withModel ? 'pattern+model' : 'pattern-only',
     practice: {
       uniqueItems: det.overall.uniqueItems,
@@ -218,6 +224,12 @@ async function main() {
     output.model = await runModelEval();
   } else if (existingModel) {
     output.model = existingModel;
+  }
+  for (const [pair, r] of Object.entries(output.model || {})) {
+    const counted = countDistinctScenarios(getEvalMessages(evalSourceLangForPair(pair), r.n));
+    if (r.distinctScenarios !== counted) {
+      throw new Error(`[${pair}] stored distinctScenarios ${r.distinctScenarios} but the set has ${counted}`);
+    }
   }
 
   writeFileSync(RESULTS_PATH, JSON.stringify(output, null, 2));
