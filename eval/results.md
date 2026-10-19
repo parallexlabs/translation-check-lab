@@ -26,9 +26,9 @@ Preserved means the numbers, times, contacts, negation count and action verbs of
 
 Transformers.js 4.3.0, ONNX threads 20
 
-| Pair | n | Distinct scenarios | Model forward | Model back | Preserved | Rate |
-|------|---|-------------------|---------------|------------|-----------|------|
-| en-fr | 30 | 30 | Xenova/opus-mt-en-fr | Xenova/opus-mt-fr-en | 18/30 | 60.0% |
-| fr-en | 30 | 30 | Xenova/opus-mt-fr-en | Xenova/opus-mt-en-fr | 20/30 | 66.7% |
-| en-es | 30 | 30 | Xenova/opus-mt-en-es | Xenova/opus-mt-es-en | 17/30 | 56.7% |
-| en-ar | 30 | 30 | Xenova/opus-mt-en-ar | Xenova/opus-mt-ar-en | 7/30 | 23.3% |
+| Pair | Model run date | n | Distinct scenarios | Model forward | Model back | Preserved | Rate |
+|------|----------------|---|-------------------|---------------|------------|-----------|------|
+| en-fr | 2026-09-29 | 30 | 30 | Xenova/opus-mt-en-fr | Xenova/opus-mt-fr-en | 18/30 | 60.0% |
+| fr-en | 2026-09-29 | 30 | 30 | Xenova/opus-mt-fr-en | Xenova/opus-mt-en-fr | 20/30 | 66.7% |
+| en-es | 2026-09-29 | 30 | 30 | Xenova/opus-mt-en-es | Xenova/opus-mt-es-en | 17/30 | 56.7% |
+| en-ar | 2026-09-29 | 30 | 30 | Xenova/opus-mt-en-ar | Xenova/opus-mt-ar-en | 7/30 | 23.3% |

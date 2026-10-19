@@ -31,6 +31,7 @@ function perfCores() {
 }
 
 const PERF_CORES = perfCores();
+const TODAY_PT = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' });   // YYYY-MM-DD, Pacific time
 
 const practice = JSON.parse(readFileSync(join(__dirname, '../web/data/practice.json'), 'utf8'));
 
@@ -143,6 +144,7 @@ async function runModelEval() {
         revisionBack: back.revision,
         transformersVersion: TRANSFORMERS_VERSION,
         onnxThreads: PERF_CORES,
+        modelRunDate: TODAY_PT,
         preserved,
         n: messages.length,
         distinctScenarios: distinct,
@@ -153,6 +155,7 @@ async function runModelEval() {
     } catch (err) {
       results[pairKey] = {
         error: String(err.message || err),
+        modelRunDate: TODAY_PT,
         n: messages.length,
         distinctScenarios: distinct,
         modelForward: forward.id,
@@ -190,13 +193,13 @@ function buildResultsMarkdown(output) {
     md += `Preserved means the numbers, times, contacts, negation count and action verbs of the source all survive the round trip; a preserved round trip is a weak signal, not proof.\n\n`;
     const threads = [...new Set(Object.values(output.model).map((r) => r.onnxThreads).filter(Boolean))];
     md += `Transformers.js ${TRANSFORMERS_VERSION}, ONNX threads ${threads.length ? threads.join(', ') : 'not recorded'}\n\n`;
-    md += '| Pair | n | Distinct scenarios | Model forward | Model back | Preserved | Rate |\n';
-    md += '|------|---|-------------------|---------------|------------|-----------|------|\n';
+    md += '| Pair | Model run date | n | Distinct scenarios | Model forward | Model back | Preserved | Rate |\n';
+    md += '|------|----------------|---|-------------------|---------------|------------|-----------|------|\n';
     for (const [pair, r] of Object.entries(output.model)) {
       if (r.error) {
-        md += `| ${pair} | ${r.n} | ${r.distinctScenarios} | ${r.modelForward} | ${r.modelBack} | ERROR | ${r.error} |\n`;
+        md += `| ${pair} | ${r.modelRunDate ?? 'not recorded'} | ${r.n} | ${r.distinctScenarios} | ${r.modelForward} | ${r.modelBack} | ERROR | ${r.error} |\n`;
       } else {
-        md += `| ${pair} | ${r.n} | ${r.distinctScenarios} | ${r.modelForward} | ${r.modelBack} | ${r.preserved}/${r.n} | ${(r.rate * 100).toFixed(1)}% |\n`;
+        md += `| ${pair} | ${r.modelRunDate ?? 'not recorded'} | ${r.n} | ${r.distinctScenarios} | ${r.modelForward} | ${r.modelBack} | ${r.preserved}/${r.n} | ${(r.rate * 100).toFixed(1)}% |\n`;
       }
     }
   }
@@ -209,7 +212,7 @@ async function main() {
   const existingModel = loadExistingModelResults();
 
   const output = {
-    date: new Date().toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' }),   // YYYY-MM-DD, Pacific time
+    date: TODAY_PT,   // the date of this run; each model row keeps its own modelRunDate
     mode: withModel ? 'pattern+model' : 'pattern-only',
     practice: {
       uniqueItems: det.overall.uniqueItems,

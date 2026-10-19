@@ -5,6 +5,7 @@
   "revisionBack": "6b166a182780e118c997879d0ad5be4b53671644",
   "transformersVersion": "4.3.0",
   "onnxThreads": 20,
+  "modelRunDate": "2026-09-29",
   "preserved": 18,
   "n": 30,
   "distinctScenarios": 30,
