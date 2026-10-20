@@ -80,6 +80,17 @@ export function getEvalMessages(lang, count) {
 }
 
 /**
+ * Count distinct scenarios: messages that differ after lowercasing, Unicode normalization (NFKC), removing
+ * punctuation and symbols, and collapsing spaces.
+ * @param {string[]} messages
+ * @returns {number}
+ */
+export function countDistinctScenarios(messages) {
+  const norm = (s) => s.normalize('NFKC').toLowerCase().replace(/[\p{P}\p{S}]/gu, ' ').replace(/\s+/g, ' ').trim();
+  return new Set(messages.map(norm)).size;
+}
+
+/**
  * @param {string} pairKey
  * @returns {'en'|'fr'}
  */
