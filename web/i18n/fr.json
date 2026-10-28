@@ -1,7 +1,7 @@
 {
   "meta.title": "Laboratoire de vérification des traductions: exercice et formation à la relecture",
   "meta.description": "Laboratoire d'exercice et environnement de formation à la relecture humaine pour les traductions de SMS humanitaires",
-  "lang.notice": "Français préparé avec assistance automatique; pas encore relu par un traducteur professionnel.",
+  "lang.notice": "French not yet reviewed by a professional translator.",
   "nav.skip": "Aller au contenu principal",
   "nav.home": "Accueil",
   "nav.practice": "Exercices",
@@ -145,7 +145,7 @@
   "footer.risk": "Écran de risques IA",
   "footer.beforePaste": "Avant de coller",
   "footer.sourceCheck": "Laboratoire de vérification des sources",
-  "footer.frNotice": "Français préparé avec assistance automatique; pas encore relu par un traducteur professionnel. | French prepared with machine assistance; not yet reviewed by a professional translator.",
+  "footer.frNotice": "French not yet reviewed by a professional translator.",
   "footer.licence": "Code : Apache-2.0. Contenu d'exercice : CC BY 4.0.",
   "sources.title": "Sources et orientations",
   "sources.kit": "Cas SMS d'évacuation, trousse de formation IA humanitaire",

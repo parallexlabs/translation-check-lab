@@ -1,7 +1,7 @@
 {
   "meta.title": "Translation Check Lab: practice and human-review training",
   "meta.description": "Practice lab and human-review training environment for checking humanitarian SMS translations",
-  "lang.notice": "French prepared with machine assistance; not yet reviewed by a professional translator.",
+  "lang.notice": "French not yet reviewed by a professional translator.",
   "nav.skip": "Skip to main content",
   "nav.home": "Home",
   "nav.practice": "Practice",
@@ -145,7 +145,7 @@
   "footer.risk": "AI Risk Screen",
   "footer.beforePaste": "Before You Paste",
   "footer.sourceCheck": "Source Check Lab",
-  "footer.frNotice": "Français préparé avec assistance automatique; pas encore relu par un traducteur professionnel. | French prepared with machine assistance; not yet reviewed by a professional translator.",
+  "footer.frNotice": "French not yet reviewed by a professional translator.",
   "footer.licence": "Code: Apache-2.0. Practice content: CC BY 4.0.",
   "sources.title": "Sources and guidance",
   "sources.kit": "Evacuation SMS case, Humanitarian AI Training Kit",
